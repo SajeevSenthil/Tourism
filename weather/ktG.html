@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather</title>
+  <link rel="stylesheet" href="ktG.css">
+</head>
+<style>
+  /* Set the background image for the entire page */
+  body {
+    background: url('ktG.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  /* Style the specific area for temperature and description */
+  .card {
+    background-color: white; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-image: none; /* Remove background image */
+  }
+
+  /* Style the temperature and description text */
+  .temp, .desc {
+    color: black;
+    font-size: 25px;
+    background-color: rgb(75, 161, 218); /* Add white background to text area */
+    opacity: 1; /* Set opacity to 100% (no transparency) */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+    background-image: none; /* Remove background image */
+  }
+</style>
+<body style="color: whitesmoke;">
+  <div class="main">
+    <div class="header">
+      <h1>Weather API</h1>
+      <p>Enter any city name in the input box below to get the data</p>
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Enter the city" class="input_text">
+      <input type="submit" value="Submit" class="submit">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="name" id="name"></h1>
+      <p class="temp"></p>
+      <p class="clouds"></p>
+      <p class="desc"></p>
+    </div>
+  </div>
+<script src="ktG.js"></script>
+</body>
+</html>
