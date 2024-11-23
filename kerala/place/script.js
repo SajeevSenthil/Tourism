@@ -82,3 +82,21 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0; 
 }
+
+const name =document.getElementById("name");
+const email =document.getElementById("email");
+
+function checkName(){
+  if(typeof(name.value)=== typeof(123)){
+    window.alert("please enter a valid Name");
+  }
+}
+checkName();
+
+function checkMailid(){
+  if(typeof(mail === "" || mail === typeof(123)))
+    {
+      window.alert("please enter a valid Email");
+
+  }
+}
