@@ -2,344 +2,874 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourism and Travel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="place/style.css">
-    <link rel="stylesheet" href="place/responsive.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo.jpg">
-    <link rel="icon" type="place/png" sizes="32x32" href="logo.jpg">
-    <link rel="icon" type="place/jpeg" sizes="16x16" href="logo.jpg">        <!--icon on tab-->>
-    <style> @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@600&display=swap');
-    .correct {
-      color: green;
-      
-    }
+    <title>Andhra Pradesh Tourism - Dynamic Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .incorrect {
-      color: red;
-    }
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #4ecdc4;
+            --accent-color: #ffd93d;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
 
-    .error {
-      color: red;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .feedback {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #f2f2f2;
-    }
-</style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        /* Animated Background with Photos */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            animation: backgroundSlide 20s ease-in-out infinite;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes backgroundSlide {
+            0%, 100% { 
+                background-image: 
+                    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                    url('https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&q=80');
+            }
+            25% { 
+                background-image: 
+                    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                    url('https://images.unsplash.com/photo-1597149041132-6cf14f155aeb?w=1920&q=80');
+            }
+            50% { 
+                background-image: 
+                    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                    url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=80');
+            }
+            75% { 
+                background-image: 
+                    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                    url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&q=80');
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: slideDown 0.8s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--glass-bg);
+            border-radius: 25px;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+                url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            z-index: 10;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.2); }
+            to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.4); }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Highlights Section */
+        .highlights {
+            padding: 5rem 5%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)),
+                url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            backdrop-filter: blur(2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            animation: expandLine 1s ease 0.5s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlight-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .highlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-card:hover img {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .highlight-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-3);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Explore Section */
+        .explore {
+            padding: 5rem 5%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+                url('https://images.unsplash.com/photo-1597149041132-6cf14f155aeb?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .question-group {
+            animation: slideInLeft 0.6s ease;
+        }
+
+        .question-group:nth-child(even) {
+            animation: slideInRight 0.6s ease;
+        }
+
+        .question-group label {
+            display: block;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-box:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .input-box.correct {
+            border-color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .input-box.incorrect {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .contact-info {
+            animation: slideInRight 0.8s ease;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 5%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
+                url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-3);
+        }
+    </style>
 </head>
-<body onload='if (window.location.href.substr(window.location.href.length - 6) == "#about") { introAboutLogoTransition(); }'>
-    <!--navbar-->
-    <nav class="navbar glass" style="height: 70px;">
-        <span><a href="#home" style="display:flex; align-items: center;"><img class="img2" src="logo.jpg" width="50"><!--add logo-->
-          <h1 class="logo" style="font-family: Poppins;text-transform: lowercase">&nbsp;Career in Travel and Tourism</h1></a></span> <!--left side logo-->
-        <ul class="nav-links">
-            <li><a href="/workspaces/Tourism/index.html" id="pri" class="active cir_border" style="font-family: Poppins;">Home</a></li>
-            <li><a href="Food.html" id="sec" class="cir_border" style="font-family: Poppins;">Food</a></li>
-            <li><a href="https://www.agoda.com/" target="_blank" id="tri" class="cir_border" style="font-family: Poppins;">Resort</a></li>
-            <li><a href="History.html" id="quad" class="cir_border" style="font-family: Poppins;">History</a></li>
-            <li><a href="Spiritual.html" id="quint" class="cir_border" style="font-family: Poppins;">Spiritual</a></li>
-            <li><a href="#contact" id="hex" class="cir_border" style="font-family: Poppins;">Contact</a></li>
-            <li><div>
-                <input type="checkbox" class="checkbox dark" id="checkbox">
-            <label for="checkbox" class="label">
-                <i class="fa fa-moon-o"></i>
-                <i class='fa fa-sun-o'></i>
-                <div class='ball'>
-            </label>
-            </div></li>
-        </ul>
-        <img src="place/maha.jpg" alt="" class="menu-btn">
-    </nav>
-    <!--navbar-->
-    <header id="home">
-        <div class="header-content">
-            <div class="main">
-            <h2  id="quote" style="font:Poppins;">Discover the vibrant specialties of Andhra Pradesh</h2>
-            <div class="line"></div>
-                <h1>Welcome to Andhra Pradesh</h1>
-        </div>
-        </div></div>
-    </header>
-    <!--Events-->
-    <section class="events" id="events">
-        <div class="container">
-        <div class="title">
-            <h1 class="dark">HIGHLIGHTS</h1>
-            <div class="line"></div>
-        </div>
-        <div class="row">
-            <article class="card col">
-                <img class="card-img" src="food/hyd.jpeg" width="120" height="120">
-                <h4 class="dark">FOOD</h4>
-                <p class="font-color">A fun road trip for your tastebuds!</p>
-                <a href="Food.html" class="ctn">View Details</a>
-            </article>
-            <article class="card col">
-                <img class="card-img" src="History/gol.jpg" width="120" height="120">
-                <h4 class="dark">HISTORY</h4>
-                <p class="font-color">A quick glance into our past.</p>
-                <a href="History.html" class="ctn">View Details</a>
-            </article>
-            <article class="card col">
-                <img class="card-img" src="Spiritual/tiru.jpg" width="120" height="120">
-                <h4 class="dark">SPIRITUAL</h4>
-                <p class="font-color">A short glimpse into the Land of temples.</p>
-                <a href="Spiritual.html" class="ctn">View Details</a>
-            </article>
-            <article class="card col">
-                <img class="card-img" src="place/res.jpeg" height="120" width="120">
-                <h4 class="dark">RESORT</h4>
-                <p class="font-color">Click here to book your Resorts</p>
-                <a href="https://www.agoda.com/" target="_blank" class="ctn">BOOK HERE</a>
-            </article>
-        </div>
-    </div>
-    </section>
-    <!--Events-->
-    <!-- About -->
-    <section id="about">
-        <div class="title">
-            <h1 class="font-color">Explore the City of pearls</h1>
-            <div class="line">
-            </div>
-        </div>
-        <br>
-        <div id="about_us">
-            <div class="boxx">
-                <div class="containerx">
-					<input type="radio" name="slider" id="item-1" checked>
-					<input type="radio" name="slider" id="item-2">
-					<input type="radio" name="slider" id="item-3">
-				<div class="cards">
-					<label class="cardt" for="item-1" id="col-img-1">
-					<img src="place/hmm.jpeg">
-					</label>
-					<label class="cardt" for="item-2" id="col-img-2">
-					<img src="place/charm.jpeg">
-					</label>
-					<label class="cardt" for="item-3" id="col-img-3">
-					<img src="place/hnn.jpg">
-					</label>
-				</div>
-				</div>
-                <div class="place/about">
-                    </div>
-            </div>
-            </div>
-        </div>
-    </section>
-    <!-- About -->
-        <!--Explore-->
-        <section class="explore" id="explore" >
-            <div class="explore-content">
-                <h1 style="font:Poppins;text-transform:italic">Explore Andhra Pradesh</h1>
-                <div class="line"></div>
-                  <form name="Quiz" onsubmit="return score()">
-    <label for="q1" style="font-family: Poppins;">Which city in Andhra Pradesh is famous for its temples and pilgrimage sites? </label>
-    <input type="text" name="q1" id="q1" class="input-box"><br>
-
-    <label for="q2" style="font-family: Poppins;">Which city is known as the "City of Destiny" and has a famous beach?  </label>
-    <input type="text" name="q2" id="q2" class="input-box"><br>
-
-    <label for="q4" style="font-family: Poppins;">What is the capital city of Andhra Pradesh?  </label>
-    <input type="text" name="q4" id="q4" class="input-box"><br>
-
-    <label for="q5" style="font-family: Poppins;">Which river is the largest in Andhra Pradesh and is important for irrigation?  </label>
-    <input type="text" name="q5" id="q5" class="input-box"><br>
-
-    <label for="q6" style="font-family: Poppins;">Which city in Andhra Pradesh is known for its ancient Buddhist sites and stupas?  </label>
-    <input type="text" name="q6" id="q6" class="input-box"><br><br>
-
-    <input type="submit" value="Let's go">
-  </form>
-
-  <div id="feedbackContainer"></div>
-
-  <script>
-    function score() {
-      const form = document.forms['Quiz'];
-
-      // Reset error styles
-      const errorFields = form.getElementsByClassName('error');
-      for (let i = 0; i < errorFields.length; i++) {
-        errorFields[i].classList.remove('error');
-      }
-
-      
-      const inputFields = form.getElementsByClassName('input-box');
-      for (let i = 0; i < inputFields.length; i++) {
-        inputFields[i].classList.remove('correct', 'incorrect');
-      }
-
-      let isValid = true;
-
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
     
-      const q1Input = form.elements['q1'];
-      const q1Value = q1Input.value.trim().toLowerCase();
-      if (q1Value !== 'tirupati') {
-        isValid = false;
-        q1Input.classList.add('incorrect');
-        q1Input.value = `Tirupati (Correct answer: tirupati)`;
-      } else {
-        q1Input.classList.add('correct');
-      }
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
 
-      const q2Input = form.elements['q2'];
-      const q2Value = q2Input.value.trim().toLowerCase();
-      if (q2Value !== 'visakhapatnam') {
-        isValid = false;
-        q2Input.classList.add('incorrect');
-        q2Input.value = `Visakhapatnam (Correct answer: visakhapatnam)`;
-      } else {
-        q2Input.classList.add('correct');
-      }
-
-      
-      const q3Input = form.elements['q4'];
-      const q3Value = q3Input.value.trim().toLowerCase();
-      if (q3Value !== 'amaravati') {
-        isValid = false;
-        q3Input.classList.add('incorrect');
-        q3Input.value = `Amaravati (Correct answer: amaravati)`;
-      } else {
-        q3Input.classList.add('correct');
-      }
-
-      
-      const q4Input = form.elements['q5'];
-      const q4Value = q4Input.value.trim().toLowerCase();
-      if (q4Value !== ' Godavari' && q4Value !== 'Dakshina Ganga') {
-        isValid = false;
-        q4Input.classList.add('incorrect');
-        q4Input.value = ` Godavari or Dakshina Ganga (Correct answers:  Godavari or Dakshina Ganga)`;
-      } else {
-        q4Input.classList.add('correct');
-      }
-
-      
-      const q5Input = form.elements['q6'];
-      const q5Value = q5Input.value.trim().toLowerCase();
-      if (q5Value !== 'Amaravati' && q5Value !== 'amaravati') {
-        isValid = false;
-        q5Input.classList.add('incorrect');
-        q5Input.value = `Amaravati (Correct answers: Amaravati)`;
-      } else {
-        q5Input.classList.add('correct');
-      }
-
-      const feedbackContainer = document.getElementById('feedbackContainer');
-
-      if (isValid) {
-        const successMessage = document.createElement('p');
-        successMessage.textContent = 'Congratulations! You answered all the questions correctly.';
-        feedbackContainer.appendChild(successMessage);
-        form.reset(); // Reset the form
-      } else {
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = 'You have so much to discover about Tamil Nadu';
-        feedbackContainer.appendChild(errorMessage);
-      }
-
-      return false; // Prevent form submission
-    }
-  </script>
-                
-            </div>
-        </section>
-    <!--Explore-->
-    <!-- contact -->
-    <section id="contact">
-        <div class="title">
-            <h1 class="font-color">Contact Us</h1>
-            <div class="line"></div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=40&h=40&fit=crop&crop=center" alt="Logo">
+                Career in Travel & Tourism
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#highlights">Highlights</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
         </div>
-        <div class="contact_us">
-            <form class="cform" action="" method="post">
-                <div class="crow-message">
-                    <h1 class="color">Send us a message</h1>
-                    <div></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Andhra Pradesh</h1>
+            <p>Discover the vibrant specialties, rich culture, and breathtaking landscapes of the Land of Spices and Temples</p>
+            <a href="#highlights" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights" id="highlights">
+        <div class="section-title">
+            <h2>HIGHLIGHTS</h2>
+        </div>
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=120&h=120&fit=crop&crop=center" alt="Food">
+                <h3>FOOD</h3>
+                <p>A fun road trip for your tastebuds! Experience authentic Andhra cuisine</p>
+                <a href="#" class="card-button">Explore Cuisine</a>
+            </div>
+            <div class="highlight-card">
+                <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=120&h=120&fit=crop&crop=center" alt="History">
+                <h3>HISTORY</h3>
+                <p>A quick glance into our glorious past and ancient heritage</p>
+                <a href="#" class="card-button">Discover History</a>
+            </div>
+            <div class="highlight-card">
+                <img src="https://images.unsplash.com/photo-1587474260584-136574528ef5?w=120&h=120&fit=crop&crop=center" alt="Spiritual">
+                <h3>SPIRITUAL</h3>
+                <p>A glimpse into the Land of temples and spiritual awakening</p>
+                <a href="#" class="card-button">Sacred Journey</a>
+            </div>
+            <div class="highlight-card">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=120&h=120&fit=crop&crop=center" alt="Resort">
+                <h3>RESORT</h3>
+                <p>Luxury accommodations and memorable stays await you</p>
+                <a href="https://www.agoda.com/" target="_blank" class="card-button">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Section -->
+    <section class="explore" id="explore">
+        <div class="section-title">
+            <h2>Explore Andhra Pradesh</h2>
+        </div>
+        <div class="quiz-container">
+            <form class="quiz-form" name="Quiz" onsubmit="return score()">
+                <div class="question-group">
+                    <label for="q1">Which city in Andhra Pradesh is famous for its temples and pilgrimage sites?</label>
+                    <input type="text" name="q1" id="q1" class="input-box" placeholder="Enter your answer...">
                 </div>
-                <div class="crow-in">
-                        <input type="text" id="name" name="name" placeholder="Your name">
-                        <input type="text" id="email" name="email" placeholder="Your Email id">
+
+                <div class="question-group">
+                    <label for="q2">Which city is known as the "City of Destiny" and has a famous beach?</label>
+                    <input type="text" name="q2" id="q2" class="input-box" placeholder="Enter your answer...">
                 </div>
-                <div class="crow">
-                    <div class="ccol-left">
-                        <select name="country" id="country">
-                            <option value="India">India</option>
-                            <option value="Russia">Russia</option>
-                            <option value="usa">USA</option>
-                            <option value="Japan">Japan</option>
-                            <option value="France">France</option>
-                            <option value="Brazil">Brazil</option>
-                        </select>
-                    </div>
+
+                <div class="question-group">
+                    <label for="q4">What is the capital city of Andhra Pradesh?</label>
+                    <input type="text" name="q4" id="q4" class="input-box" placeholder="Enter your answer...">
                 </div>
-                <div class="crow">
-                    <div class="ccol-left">
-                        <textarea type="text" id="remarks" name="remarks" placeholder="Your Remarks....." style="height: 150px;"></textarea>
-                    </div>
+
+                <div class="question-group">
+                    <label for="q5">Which river is the largest in Andhra Pradesh and is important for irrigation?</label>
+                    <input type="text" name="q5" id="q5" class="input-box" placeholder="Enter your answer...">
                 </div>
-                <input class="crow-s" type="submit" value="Submit">
+
+                <div class="question-group">
+                    <label for="q6">Which city in Andhra Pradesh is known for its ancient Buddhist sites and stupas?</label>
+                    <input type="text" name="q6" id="q6" class="input-box" placeholder="Enter your answer...">
+                </div>
+
+                <button type="submit" class="submit-btn">Test Your Knowledge</button>
             </form>
-            <div class="cbox">
-                <div>
-                    <p class="cbox-message">Prefer some other way ?<br>Reach us by using the details given below</p>
-                <div class="cbox-line"></div>
-                </div>
-                <div class="c_boxx">
-                    <a href="mailto:abc@gmail.com"><i class="fa fa-envelope"></i>
-                        Mail: prithvianandakumar@gmail.com , sajeevs0706@gmail.com
-                    </a>
-                </div>
-                <div class="c_boxx">
-                    <a href="tel:+91-12345-67890"><i class="fa fa-phone"></i>
-                        Phone: (+91) 12345-67890
-                    </a>
-                </div>
-                <div class="c_boxx">
-                    <a href="#"><i class="fa fa-map-marker"></i>
-                        Location: Coimbatore , TamilNadu, India
-                    </a>
-                </div>
-            </div>
+            <div id="feedbackContainer"></div>
         </div>
     </section>
-    <!-- contact  -->
-    <!-- up scroll -->
-    <i class="fa fa-chevron-up" onclick="topFunction()" id="upbtn"></i>
-    <!-- end -->
-    <!--footer-->
-    <section class="footer">
-        <span>Made by Sajeev and Prithvi.</span>
-        <div class="social">
-            <li>
-                
-                <a href="https://www.instagram.com/sajeev_2006?igsh=cTgwOHI5djN4YXc5" target="_blank" rel="noreferrer"><i class="fa fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/sajeev-senthil-35814a2b8/" target="_blank" rel="noreferrer"><i class="fa fa-linkedin-square"></i></a>
-                <a href="https://www.instagram.com/priths____?igsh=YzBnZDBkYnFtcWtn" target="_blank" rel="noreferrer"><i class="fa fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/prithvi-anandakumar-93b4a4281/" target="_blank" rel="noreferrer"><i class="fa fa-linkedin-square"></i></a>
-            </li>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
         </div>
-    </section>
-    <!--footer-->
-
-    <script>
-        const menuBtn = document.querySelector('.menu-btn')
-        const navlinks = document.querySelector('.nav-links')
-
-        menuBtn.addEventListener('click',()=>{
-            navlinks.classList.toggle('mobile-menu')
-        })
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="place/script.js"></script>
-</body>
-</html>
+        <div class="contact-container">
+            <form class="contact-form">
+                <h3 style="color: white; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Send us a message</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" placeholder="Your Name" class="input-box">
+                    <input type="email" placeholder="Your Email" class="input-box">
+                </div>
+                <select class="input-box" style="margin-bottom: 1rem;">
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Other">Other
